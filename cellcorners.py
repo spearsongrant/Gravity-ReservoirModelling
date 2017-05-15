@@ -1,13 +1,25 @@
 #-------------------------------------------------------------------------------
 # Name:        cellcorners.py
 # Purpose:     File to calculate the cell corners of a TOUGH2 model from the input file.
+
+# Copyright:   2016 Sophie Pearson-Grant
 #
-# Author:      Sophie Pearson-Grant
+# This file is part of Gravity-ReservoirModelling.
 #
-# Created:     10/07/2014
-# Copyright:   (c) s.pearson-grant@gns.cri.nz
+#    Gravity-ReservoirModelling is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# 
+#    Gravity-ReservoirModelling is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with Gravity-ReservoirModelling.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
 #
 # Command line needs name of file, number of elements in x direction, number of elements in y direction:
 #     cellcorners.py modelname.extension #_x_elements #_y_elements
