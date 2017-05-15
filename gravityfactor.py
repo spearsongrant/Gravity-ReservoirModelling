@@ -1,0 +1,73 @@
+#-------------------------------------------------------------------------------
+# Name:        gravityfactor.py
+# Purpose:     calculate the 'gravity factor' - the contribution of each grid block to each
+#              gravity measurement station. Uses equation 10 from Li and Chouteau 1998 
+#              (the derivation from Okabe 1979).
+#
+# Author:      Sophie Pearson-Grant
+#
+# Created:     15/07/2014
+# Copyright:   (c) s.pearson-grant@gns.cri.nz
+#
+#
+#
+# File requirements:
+# cellcorners.dat - a file containing the grid block name and the minimum and maximum of each grid block in the x,y,z directions.
+# station locations.csv - the measured gravity station name, x, y and z coordinates.
+#
+# Code dependencies:
+# cellcorners.py to create cellcorners.dat from TOUGH2 input file (if required).
+# Used as input for gravity.py.
+#
+#-------------------------------------------------------------------------------
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
+
+import numpy as np
+
+print 'Calculating the contribution of each model element to the gravity signal.'
+
+grid=np.loadtxt('cellcorners.dat',delimiter = ',') #cell number, x min, x max, y min, y max, z min, z max
+stationlocs=np.loadtxt('station locations.csv', delimiter=',', skiprows=1, usecols=range(1,4)) #x,y,z. Skips the first row, which is the headers, and the first column, which contains the station name.
+
+# a subroutine to carry out the multiplication and summation in the main term of equation 10 from Li and Chouteau 1998. Also to multiply by G (density is calculated elsewhere as it varies between model runs/time steps).
+def gravitycalculation(stationlocs,cellcorners):
+    r=np.zeros((2,2,2))
+    mu=np.zeros((2,2,2))
+    g=np.zeros((2,2,2))
+    l=np.zeros((2,2,2))
+    x=np.zeros((2))
+    y=np.zeros((2))
+    z=np.zeros((2))
+
+    x[0]=stationlocs[0]-cellcorners[1] #x1
+    x[1]=stationlocs[0]-cellcorners[2] #x2
+    y[0]=stationlocs[1]-cellcorners[3] #y1
+    y[1]=stationlocs[1]-cellcorners[4] #y2
+    z[0]=-(stationlocs[2]-cellcorners[5]) #z1  Negative because z is positive downwards, but is negative downwards in Petrasim
+    z[1]=-(stationlocs[2]-cellcorners[6]) #z2
+
+#loop through each x,y,z combination calculating the terms for summation.
+    for i in range(2):
+        for j in range(2):
+            for k in range(2):
+                r[i,j,k]=np.sqrt(np.square(x[i])+np.square(y[j])+np.square(z[k])) #  Equation 6, to get the scalar distance.
+                mu[i,j,k]=((-1)**i)*((-1)**j)*((-1)**k) # Equation 7, to determine if positive or negative term.
+                g[i,j,k]=mu[i,j,k]*((x[i]*np.log(y[j]+r[i,j,k]))+(y[j]*np.log(x[i]+r[i,j,k]))+(2*z[k]*np.arctan((x[i]+y[j]+r[i,j,k])/z[k]))) # Equation 10, to determine the gravity factor for each x,y,z combination.
+
+    gravityfactor=-6.67384e-11*np.sum(g) # Sum and multiply by G.
+    return gravityfactor # send gravity factor for that model cell-measurement station pair back to main routine.
+
+
+# main routine to calculate gravity factor for each model cell for each measurement station. Calls gravitycalculation subroutine.
+gf=np.zeros((len(grid),len(stationlocs)+1)) # extra column to include cell names
+for station in range(len(stationlocs)):
+    for element in range(len(grid)):
+        gf[element,0]=grid[element,0] # column zero of output is cell name
+        gf[element,station+1]=gravitycalculation(stationlocs[station,:],grid[element,:]) #other columns are gravity factors
+
+np.savetxt('gravityfactor.dat', gf, fmt='%g', delimiter=',')
