@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
 # Name:        cellcorners.py
 # Purpose:     File to calculate the cell corners of a TOUGH2 model from the input file.
-
+#
 # Copyright:   2016 Sophie Pearson-Grant
 #
 # This file is part of Gravity-ReservoirModelling.
