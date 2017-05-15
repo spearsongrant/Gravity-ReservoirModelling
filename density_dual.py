@@ -2,10 +2,24 @@
 # Name:        density.py
 # Purpose:     Code to calculate density of each cell block for each time step.
 #
-# Author:      Sophie Pearson-Grant
+# Copyright:   2016 Sophie Pearson-Grant
 #
-# Created:     10/07/2014
-# Copyright:   (c) s.pearson-grant@gns.cri.nz
+# This file is part of Gravity-ReservoirModelling.
+#
+#    Gravity-ReservoirModelling is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    Gravity-ReservoirModelling is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with Gravity-ReservoirModelling.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
 # 
 # Dependent on: input tough2 file
 #               output tough2 file.
