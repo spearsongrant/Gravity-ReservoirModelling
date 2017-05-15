@@ -5,4 +5,4 @@ Suite of 4 python scripts to calculate gravity from density of fluid. This is se
 
 This has been written by me for my use, but also in the hope that others may find it useful. It requires basic to moderate understanding of Python. Inverse modelling using PEST can be used to make the process semi-automated - see Geothermics special issue paper for more information as well as theory behind the code.
 
-As well as standard Python libraries, it also uses PyTOUGH.
+As well as standard Python libraries, it also requires PyTOUGH to be installed.
