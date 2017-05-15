@@ -51,15 +51,20 @@ lst=t2listing(sys.argv[2])#TOUGH2modelfilename.out
 if len(sys.argv)==3: #if no time steps on command line calculate for each timestep
     lst.first()
     fluid=np.zeros((len(dat.grid.blocklist),len(lst.times)+1)) #create empty matrix for each element at each time
+    
     for time in range(len(lst.times)): #loop through each time
         element=0
+        
         for cell in range(len(lst.element.row_name)): #loop through each element
             rowname=str(lst.element.row_name[cell])
+            
             if rowname[0]=='2': # Elements that have a 2 in the first column are fracture properties so are incorporated elsewhere
                 continue
             else: # if it's not a facture property do the calculation
+                
                 for rock in range(len(dat.grid.rocktypelist)):
                     if dat.grid.block[rowname].rocktype==dat.grid.rocktypelist[rock]: # loop through finding the relevant rocktype
+                        
                         matpor=dat.grid.rocktypelist[rock+2].porosity
                         if cell==len(lst.element.row_name)-1: # If it's the last element and it's not a fracture property calculate it directly because there isn't a next block to compare it to and it can't be MINC. 1 row less because has titles.
                             fluid[element,time+1]=matpor*(lst.element['DG'][cell]*lst.element['SG'][cell]+lst.element['DW'][cell]*lst.element['SW'][cell]) # porosity of block * density of fluid.
@@ -72,17 +77,22 @@ if len(sys.argv)==3: #if no time steps on command line calculate for each timest
                             fluid[element,time+1]=matpor*(lst.element['DG'][cell]*lst.element['SG'][cell]+lst.element['DW'][cell]*lst.element['SW'][cell]) #if it's a standard block just do the straight-forward calculation.
                         fluid[element,0]=lst.element.row_name[cell]
                         element=element+1
+                        
         print lst.time
         lst.next()
     title=np.hstack((0.000000,lst.times))
     fluidoutput=np.vstack((title,fluid))
+
+# if time steps are specified
 else:
     notimes=len(sys.argv)-3 #first three are program and file names, rest are time steps.
     times=np.zeros((notimes+1))
     fluid=np.zeros((len(dat.grid.blocklist),notimes+1)) #create empty matrix for each element at each time
+    
     for time in range(notimes): #loop through each time
         lst.time=float(sys.argv[time+3])
         element=0
+        
         for cell in range(len(lst.element.row_name)): #loop through each element
             rowname=str(lst.element.row_name[cell])
             if rowname[0]=='2': # Elements that have a 2 in the first column are fracture properties so are incorporated elsewhere
