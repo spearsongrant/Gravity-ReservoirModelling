@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:        gravityfactor.py
-# Purpose:     calculate the 'gravity factor' - the contribution of each grid block to each
+# Purpose:     calculate the 'gravity factor' - the contribution of each grid block to the signal at each
 #              gravity measurement station. Uses equation 10 from Li and Chouteau 1998 
 #              (the derivation from Okabe 1979).
 #
@@ -32,6 +32,8 @@
 #       cellcorners.py to create cellcorners.dat from TOUGH2 input file (if required).
 #       Used as input for gravity.py.
 #
+#
+# Command line: gravityfactor.py [-g grid file (optional)] [-s station locations (optional)] [-o output filename (optional)]
 #-------------------------------------------------------------------------------
 
 def main():
@@ -41,12 +43,33 @@ if __name__ == '__main__':
     main()
 
 import numpy as np
+import argparse
+
+parser=argparse.ArgumentParser(description='Calculate contribution of each grid block to each gravity measurement station signal')
+parser.add_argument('-g',type=str, help='optional grid information filename. Default is cellcorners.dat')
+parser.add_argument('-s',type=str, help='optional station locations filename. Default is "station locations.csv"')
+parser.add_argument('-o',type=str, help='optional output filename. Default is gravityfactor.dat')
+args=parser.parse_args()
+
+
 
 print 'Calculating the contribution of each model element to the gravity signal.'
 
-grid=np.loadtxt('cellcorners.dat',delimiter = ',') #cell number, x min, x max, y min, y max, z min, z max
-stationlocs=np.loadtxt('station locations.csv', delimiter=',', skiprows=1, usecols=range(1,4)) #x,y,z. Skips the first row, which is the headers, and the first column, which contains the station name.
 
+# import grid. Format is cell number, x min, x max, y min, y max, z min, z max
+if args.g:
+    grid=np.loadtxt(args.g,delimiter = ',')
+else:
+    grid=np.loadtxt('cellcorners.dat',delimiter = ',') #cell number, x min, x max, y min, y max, z min, z max
+
+# import station locations. x,y,z. Skips the first row, which is the headers, and the first column, which contains the station name.
+if args.s:
+    stationlocs=np.loadtxt(args.s, delimiter=',', skiprows=1, usecols=range(1,4))
+else:
+    stationlocs=np.loadtxt('station locations.csv', delimiter=',', skiprows=1, usecols=range(1,4)) 
+
+    
+    
 # a subroutine to carry out the multiplication and summation in the main term of equation 10 from Li and Chouteau 1998. Also to multiply by G (density is calculated elsewhere as it varies between model runs/time steps).
 def gravitycalculation(stationlocs,cellcorners):
     r=np.zeros((2,2,2))
@@ -83,4 +106,9 @@ for station in range(len(stationlocs)):
         gf[element,0]=grid[element,0] # column zero of output is cell name
         gf[element,station+1]=gravitycalculation(stationlocs[station,:],grid[element,:]) #other columns are gravity factors
 
-np.savetxt('gravityfactor.dat', gf, fmt='%g', delimiter=',')
+        
+# save output to file        
+if args.o:
+    np.savetxt(args.o, gf, fmt='%g', delimiter=',')
+else:        
+    np.savetxt('gravityfactor.dat', gf, fmt='%g', delimiter=',')
