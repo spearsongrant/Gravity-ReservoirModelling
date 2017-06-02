@@ -9,4 +9,4 @@ This has been written by me for my use, but also in the hope that others may fin
 
 Please see the paper 'Gravity measurements as a calibration tool for geothermal reservoir modelling' by S. C. Pearson-Grant, P. Franz and J. Clearwater in Geothermics special issue for background information and case studies (including the examples provided here).
 
-Please contact me if you are interested in the code.
+Please feel free to contact me if you are interested in the code or any aspect of the work.
