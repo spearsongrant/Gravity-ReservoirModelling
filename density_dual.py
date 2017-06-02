@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:        density.py
-# Purpose:     Code to calculate density of each cell block for each time step.
+# Purpose:     Code to calculate density of each model cell for each time step.
 #
 # Copyright:   2016 Sophie Pearson-Grant
 #
@@ -25,8 +25,8 @@
 #               output tough2 file.
 #               Optionally can include the timesteps that you want on the command line, otherwise it will step through every timestep.
 #
-# Command line format:
-# density.py filename.dat filename.out [optional]time1 time2... timelast
+# Command line format ([] means optional):
+# density.py filename.dat filename.out [-o output_filename] [-t time1 time2 time3...]
 #-------------------------------------------------------------------------------
 
 def main():
@@ -35,20 +35,31 @@ def main():
 if __name__ == '__main__':
     main()
 
-print 'Calculating density of fluid in each element from TOUGH2 output at time (s):'
 
 import numpy as np
 from t2listing import *
 from t2data import *
-import sys
+import argparse
 
-#import the output and input files
-dat=t2data(sys.argv[1])#TOUGH2modelfilename.dat
-lst=t2listing(sys.argv[2])#TOUGH2modelfilename.out
+
+parser=argparse.ArgumentParser(description='Calculate density in each model cell')
+parser.add_argument('i',type=str, help='TOUGH2 input file')
+parser.add_argument('r',type=str, help='TOUGH2 results/listing file')
+parser.add_argument('-o',type=str, help='optional output filename. Default is density.dat')
+parser.add_argument('-t',type=float, nargs='*', help='timesteps to calculate at (rounded to nearest output step). Default is every timestep')
+args=parser.parse_args()
+
+
+print 'Calculating density of fluid in each element from TOUGH2 output at time (s):'
+
+
+#import the input and output files
+dat=t2data(args.i)
+lst=t2listing(args.r)
 
 #Calculate the density for each time step
 #First check if want specific time steps or do all
-if len(sys.argv)==3: #if no time steps on command line calculate for each timestep
+if not args.t: #if no time steps on command line calculate for each timestep
     lst.first()
     fluid=np.zeros((len(dat.grid.blocklist),len(lst.times)+1)) #create empty matrix for each element at each time
     
@@ -85,12 +96,12 @@ if len(sys.argv)==3: #if no time steps on command line calculate for each timest
 
 # if time steps are specified
 else:
-    notimes=len(sys.argv)-3 #first three are program and file names, rest are time steps.
+    notimes=len(args.t)
     times=np.zeros((notimes+1))
     fluid=np.zeros((len(dat.grid.blocklist),notimes+1)) #create empty matrix for each element at each time
     
     for time in range(notimes): #loop through each time
-        lst.time=float(sys.argv[time+3])
+        lst.time=float(args.t[time])
         element=0
         
         for cell in range(len(lst.element.row_name)): #loop through each element
@@ -117,7 +128,13 @@ else:
     fluidoutput=np.vstack((times,fluid))
 
 fluidoutput=fluidoutput[np.argsort(fluidoutput[:,0])]
-np.savetxt('density.dat',fluidoutput,delimiter=",",fmt='%f')
+
+
+# save to file. columns are index, time 1, time 2,.... First row is the times.
+if args.o:
+    np.savetxt(args.o,fluidoutput,delimiter=",",fmt='%f')
+else:
+    np.savetxt('density.dat',fluidoutput,delimiter=",",fmt='%f')
 
 
 
