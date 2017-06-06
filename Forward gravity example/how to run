@@ -1,0 +1,9 @@
+This folder contains an example of calculating gravity from a TOUGH2 output file. The resulting files are included for comparison.
+
+The command line commands are below to carry out the calculations.
+-h option at the command line, or comments within each script, provide more detail as well as optional arguments where available (such as changing resulting filenames).
+                          
+cellcorners.py model.in 20 20
+gravityfactor.py
+density_dual.py model.in model.out
+gravity.py
