@@ -1,0 +1,27 @@
+pcf
+* control data
+norestart estimation
+1 5 1 0 1
+1 1 single point 1 0 0
+5.0 2.0 0.3 0.001 10
+5.0 5.0 0.001
+0.1
+30 0.005 4 4 0.01 4
+1 1 1
+* parameter groups
+POR relative 0.01 0.0 switch 2 parabolic
+* parameter data
+MATXPOR none factor 0.5 0.0001 0.999 POR 1 0 1
+* observation groups
+GRAV
+* observation data
+station1	-591.601425012	1	GRAV
+station2	-142.942110896	1	GRAV
+station3	-273.958797221	1	GRAV
+station4	-142.942110896	1	GRAV
+station5	-86.1874604698	1	GRAV
+* model command line
+Runmodel.bat
+* model input/output
+model.tpl model.in
+model.ins gravitydifference.dat
