@@ -12,8 +12,8 @@ PEST
 Python
 PyTOUGH
 TOUGH2 EOS1
-density_dual.py (provided here)
-gravity.py (provided here)
+density_dual.py (provided in this repository)
+gravity.py (provided in this repository)
 
 
 PEST files:
