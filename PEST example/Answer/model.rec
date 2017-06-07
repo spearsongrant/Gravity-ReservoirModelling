@@ -1,0 +1,329 @@
+
+                       PEST RUN RECORD: CASE model
+
+
+PEST Version: 12.3.1
+
+
+PEST run mode:-
+
+   Parameter estimation mode
+
+
+Case dimensions:-
+
+   Number of parameters                           :     1
+   Number of adjustable parameters                :     1
+   Number of parameter groups                     :     1
+   Number of observations                         :     5
+   Number of prior estimates                      :     0
+
+
+Model command line(s):-
+
+   Runmodel.bat
+
+
+Jacobian command line:-
+
+   na
+
+
+Model interface files:-
+
+   Templates:
+      model.tpl
+   for model input files:
+      model.in
+
+   (Parameter values written using single precision protocol.)
+   (Decimal point always included.)
+
+   Instruction files:
+      model.ins
+   for reading model output files:
+      gravitydifference.dat
+
+
+PEST-to-model message file:-
+
+   na
+
+
+Derivatives calculation:-
+
+Param        Increment   Increment   Increment   Forward or   Multiplier  Method
+group        type                    low bound   central      (central)   (central)
+por          relative    1.0000E-02   none         switch       2.000     parabolic
+
+
+Parameter definitions:-
+
+Name         Trans-            Change       Initial        Lower          Upper
+             formation         limit        value          bound          bound
+matxpor      none              factor     0.500000       1.000000E-04   0.999000    
+
+Name         Group          Scale         Offset        Model command number
+matxpor      por           1.00000        0.00000            1
+
+
+Prior information:-
+
+   No prior information supplied
+
+
+Observations:-
+
+Observation name        Observation       Weight       Group
+ station1               -591.601          1.000       grav        
+ station2               -142.942          1.000       grav        
+ station3               -273.959          1.000       grav        
+ station4               -142.942          1.000       grav        
+ station5               -86.1875          1.000       grav        
+
+
+Control settings:-
+
+   Initial lambda                                               :  5.0000    
+   Lambda adjustment factor                                     :  2.0000    
+   Sufficient new/old phi ratio per optimisation iteration      : 0.30000    
+   Limiting relative phi reduction between lambdas              : 1.00000E-03
+   Maximum trial lambdas per iteration                          :  10
+   Forgive model run failure during lamda testing               : no
+   Forgive model run failure during Jacobian runs               : no
+
+   Perform Broyden's update of Jacobian matrix                  : no
+   Undertake observation re-referencing                         : no
+
+   Maximum  factor  parameter change (factor-limited changes)   :  5.0000
+   Maximum relative parameter change (relative-limited changes) : na
+   Fraction of initial parameter values used in computing
+   change limit for near-zero parameters                        : 1.00000E-03
+   Allow bending of parameter upgrade vector                    : no
+   Allow parameters to stick to their bounds                    : no
+
+   Relative phi reduction below which to begin use of
+   central derivatives                                          : 0.10000             
+   Iteration at which to first consider derivatives switch      :   1
+
+   Relative phi reduction indicating convergence                : 0.50000E-02
+   Number of phi values required within this range              :   4
+   Maximum number of consecutive failures to lower phi          :   4
+   Minimal relative parameter change indicating convergence     : 0.10000E-01
+   Number of consecutive iterations with minimal param change   :   4
+   Maximum number of optimisation iterations                    :  30
+
+   Attempt automatic user intervention                          : no
+
+   Attempt reuse of parameter sensitivities                     : no
+
+
+File saving options: -
+
+   Save best JCO file                                           : yes
+   Save multiple JCO files                                      : no
+   Save multiple REI files                                      : no
+   Save multiple PAR files                                      : no
+
+
+                            OPTIMISATION RECORD
+
+
+INITIAL CONDITIONS: 
+   Sum of squared weighted residuals (ie phi) =  5.58314E+06
+
+      Current parameter values
+      matxpor         0.500000    
+
+
+OPTIMISATION ITERATION NO.        : 1
+   Model calls so far             : 1
+   Starting phi for this iteration:  5.58314E+06
+
+       Lambda =   5.0000     ----->
+          Phi =  8.06478E-04  (  0.000 of starting phi)
+
+   No more lambdas: phi is less than 0.3000 of starting phi
+   Lowest phi this iteration:  8.06478E-04
+
+      Current parameter values                 Previous parameter values
+      matxpor         0.100000                 matxpor          0.500000    
+   Maximum   factor change:  5.000     ["matxpor"]
+   Maximum relative change: 0.8000     ["matxpor"]
+
+
+OPTIMISATION ITERATION NO.        : 2
+   Model calls so far             : 3
+   Starting phi for this iteration:  8.06478E-04
+
+       Lambda =   2.5000     ----->
+          Phi =  7.97584E-04  (  0.989 of starting phi)
+
+       Lambda =   1.2500     ----->
+          Phi =  7.97584E-04  (  0.989 of starting phi)
+
+   No more lambdas: relative phi reduction between lambdas less than 0.0010
+   Lowest phi this iteration:  7.97584E-04
+   Relative phi reduction between optimisation iterations less than 0.1000
+   Switch to central derivatives calculation
+
+      Current parameter values                 Previous parameter values
+      matxpor         9.999817E-02             matxpor          0.100000    
+   Maximum   factor change:  1.000     ["matxpor"]
+   Maximum relative change: 1.8300E-05 ["matxpor"]
+
+
+OPTIMISATION ITERATION NO.        : 3
+   Model calls so far             : 6
+   Starting phi for this iteration:  7.97584E-04
+
+       Lambda =   1.2500     ----->
+          Phi =  1.34781E-03  (  1.690 times starting phi)
+
+       Lambda =  0.62500     ----->
+          Phi =  1.34781E-03  (  1.690 times starting phi)
+
+   No more lambdas: relative phi reduction between lambdas less than 0.0010
+   Lowest phi this iteration:  1.34781E-03
+
+      Current parameter values                 Previous parameter values
+      matxpor         9.999406E-02             matxpor          9.999817E-02
+   Maximum   factor change:  1.000     ["matxpor"]
+   Maximum relative change: 4.1101E-05 ["matxpor"]
+
+
+OPTIMISATION ITERATION NO.        : 4
+   Model calls so far             : 10
+   Starting phi for this iteration:  1.34781E-03
+
+       Lambda =  0.62500     ----->
+          Phi =  7.51503E-04  (  0.558 of starting phi)
+
+       Lambda =  0.31250     ----->
+          Phi =  7.51503E-04  (  0.558 of starting phi)
+
+   No more lambdas: relative phi reduction between lambdas less than 0.0010
+   Lowest phi this iteration:  7.51503E-04
+
+      Current parameter values                 Previous parameter values
+      matxpor         9.999769E-02             matxpor          9.999406E-02
+   Maximum   factor change:  1.000     ["matxpor"]
+   Maximum relative change: 3.6302E-05 ["matxpor"]
+
+
+OPTIMISATION ITERATION NO.        : 5
+   Model calls so far             : 14
+   Starting phi for this iteration:  7.51503E-04
+
+       Lambda =  0.31250     ----->
+          Phi =  1.27198E-02  ( 16.926 times starting phi)
+
+       Lambda =  0.15625     ----->
+          Phi =  1.27198E-02  ( 16.926 times starting phi)
+
+   No more lambdas: relative phi reduction between lambdas less than 0.0010
+   Lowest phi this iteration:  1.27198E-02
+
+      Current parameter values                 Previous parameter values
+      matxpor         9.999733E-02             matxpor          9.999769E-02
+   Maximum   factor change:  1.000     ["matxpor"]
+   Maximum relative change: 3.6001E-06 ["matxpor"]
+
+   Optimisation complete: relative parameter change less than 1.0000E-02
+                          over  4 successive iterations.
+   Total model calls:     18
+
+   The model has been run one final time using best parameters. 
+   Thus all model input files contain best parameter values, and model 
+   output files contain model results based on these parameters.
+
+
+                            OPTIMISATION RESULTS
+
+
+Parameters ----->
+
+Parameter        Estimated         95% percent confidence limits
+                 value             lower limit       upper limit
+ matxpor        9.999769E-02       9.999163E-02      0.100004    
+
+Note: confidence limits provide only an indication of parameter uncertainty.
+      They rely on a linearity assumption which  may not extend as far in 
+      parameter space as the confidence limits themselves - see PEST manual.
+
+See file model.sen for parameter sensitivities.
+
+
+Observations ----->
+
+Observation            Measured       Calculated     Residual       Weight     Group
+                       value          value
+station1              -591.601       -591.627       2.568743E-02    1.000      grav        
+station2              -142.942       -142.949       6.403939E-03    1.000      grav        
+station3              -273.959       -273.959       2.587440E-04    1.000      grav        
+station4              -142.942       -142.949       6.403939E-03    1.000      grav        
+station5              -86.1875       -86.1906       3.093607E-03    1.000      grav        
+
+See file model.res for more details of residuals in graph-ready format.
+
+See file model.seo for composite observation sensitivities.
+
+
+Objective function ----->
+
+  Sum of squared weighted residuals (ie phi)                =  7.5150E-04
+
+
+Correlation Coefficient ----->
+
+  Correlation coefficient                                   =   1.0000    
+
+
+Analysis of residuals ----->
+
+  All residuals:-
+     Number of residuals with non-zero weight                       =     5
+     Mean value of non-zero weighted residuals                      =  8.3695E-03
+     Maximum weighted residual [observation "station1"]             =  2.5687E-02
+     Minimum weighted residual [observation "station3"]             =  2.5874E-04
+     Standard variance of weighted residuals                        =  1.8788E-04
+     Standard error of weighted residuals                           =  1.3707E-02
+
+     Note: the above variance was obtained by dividing the objective 
+     function by the number of system degrees of freedom (ie. number of 
+     observations with non-zero weight plus number of prior information 
+     articles with non-zero weight minus the number of adjustable parameters.)
+     If the degrees of freedom is negative the divisor becomes 
+     the number of observations with non-zero weight plus the number of 
+     prior information items with non-zero weight.
+
+
+K-L information statistics ----->
+
+
+  AIC   =  -40.01437    
+  AICC  =  -34.01437    
+  BIC   =  -40.79549    
+  KIC   =  -19.56101    
+
+Parameter covariance matrix ----->
+
+               matxpor   
+matxpor        4.7728E-12
+
+
+Parameter correlation coefficient matrix ----->
+
+               matxpor   
+matxpor         1.000    
+
+
+Normalized eigenvectors of parameter covariance matrix ----->
+
+              Vector_1   
+matxpor         1.000    
+
+
+Eigenvalues ----->
+
+               4.7728E-12
