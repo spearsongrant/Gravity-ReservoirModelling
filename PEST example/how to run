@@ -1,0 +1,29 @@
+This is an example of how to use the PEST methodology to calibrate a reservoir model against microgravity data, as described in the paper 'Gravity measurements as a calibration tool for geothermal reservoir modelling' by S. C. Pearson-Grant, P. Franz and J. Clearwater in Geothermics special issue.
+Gravity files cellcorners.dat and gravityfactor.dat do not change unless the model grid or station locations change, and therefore are calculated before the PEST process rather than within it for efficiency.
+
+To run, at the command line enter > pest model
+Please see http://www.pesthomepage.org for more information on PEST.
+Please see http://esd1.lbl.gov/research/projects/tough/ for more information on TOUGH2.
+
+
+Scripts/software required:
+PEST
+Python
+PyTOUGH
+TOUGH2 EOS1
+density_dual.py (provided here)
+gravity.py (provided here)
+
+
+PEST files:
+model.pst has the parameters of the PEST run
+model.tpl has the template of the TOUGH2 input file, with the parameters to be modified according to model.pst
+model.ins tells PEST how to read the output of the python gravity scripts
+
+Gravity files:
+cellcorners.dat - calculated in cellcorners.py from the TOUGH2 input file before running the PEST estimation process
+gravityfactor.dat - calculated in gravityfactor.py before running the PEST estimation process
+
+Other files:
+station locations.csv - required for the gravity difference calculation
+Runmodel.bat - called within model.pst to (re)run the TOUGH2 model and (re)calculate the density and gravity difference at each iteration.
