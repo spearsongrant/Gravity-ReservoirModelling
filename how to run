@@ -1,4 +1,5 @@
-The running order is detailed below, along with the required inputs. -h option at the command line, or comments within each script, will provide more detail as well as any optional arguments.
+The running order is detailed below, along with the required inputs. 
+-h option at the command line, or comments within each script, provide more detail as well as information about optional arguments.
                           
 cellcorners.py inputfile number_elements_x number_elements_y
 gravityfactor.py
