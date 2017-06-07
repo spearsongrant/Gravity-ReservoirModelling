@@ -2,8 +2,8 @@ This is an example of how to use the PEST methodology to calibrate the porosity 
 Gravity files cellcorners.dat and gravityfactor.dat do not change unless the model grid or station locations change, and therefore are calculated before the PEST process rather than within it for efficiency.
 The PEST result file model.rec is provided for comparison.
 
+Please see http://www.pesthomepage.org for more information on PEST, including how to create input files and read output files.
 To run, at the command line enter > pest model
-Please see http://www.pesthomepage.org for more information on PEST.
 Please see http://esd1.lbl.gov/research/projects/tough/ for more information on TOUGH2.
 
 
