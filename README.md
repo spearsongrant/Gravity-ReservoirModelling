@@ -7,6 +7,6 @@ As well as standard Python libraries, it also requires PyTOUGH to be installed.
 
 This has been written by me for my use, but also in the hope that others may find it useful. Two examples are included, of the gravity calculation, and of the PEST parameter estimation.
 
-Please see the paper 'Gravity measurements as a calibration tool for geothermal reservoir modelling' by S. C. Pearson-Grant, P. Franz and J. Clearwater in Geothermics special issue for background information and case studies (including the examples provided here).
+Please see the paper 'Gravity measurements as a calibration tool for geothermal reservoir modelling' by S. C. Pearson-Grant, P. Franz and J. Clearwater in Geothermics 2018 for background information and case studies (including the examples provided here). https://www.sciencedirect.com/science/article/pii/S0375650516301869
 
 Please feel free to contact me if you are interested in the code or any aspects of the work.
